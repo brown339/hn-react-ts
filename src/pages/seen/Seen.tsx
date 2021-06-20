@@ -1,24 +1,36 @@
 import React from 'react';
 
-interface Props { }
+import Post from '../../components/post/Post';
 
-class Seen extends React.Component {
+interface Props { }
+interface State {
+  ids: number[]
+}
+
+class Seen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      postIds: localStorage.seenIds
+      ids: JSON.parse(localStorage.getItem('seen') as string) || []
     };
   }
 
-  async componentDidMount() {
-    // Fetch the latest 
-    // const stories = Database.getNewStories();
+  renderPosts(): JSX.Element[] {
+    const { ids } = this.state;
+
+    return ids.map((id: number) => {
+      return (
+        <Post key={id} id={id} />
+      )
+    });
   }
 
-  render() {
+  render(): JSX.Element {
     return (
-      <div>Seen</div>
-    );
+      <div className="post-list">
+        {this.renderPosts()}
+      </div>
+    )
   }
 }
 

@@ -1,9 +1,23 @@
 div.post-item {
   box-shadow: 0 0 10px 3px rgb(0 0 0 / 15%);
+  border: 1px solid transparent;
   border-radius: 4px;
+  cursor: pointer;
   margin-bottom: 20px;
 }
 
-div.post-item p {
+div.post-item.bookmarked {
+  background: blue;
+}
+
+div.post-item.bookmarked > p {
+  color: #fff;
+}
+
+div.post-item:hover {
+  border: 1px solid blue;
+}
+
+div.post-item > p {
   padding: 20px;
 }

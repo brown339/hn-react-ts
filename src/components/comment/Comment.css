@@ -9,3 +9,11 @@ div.comment-item {
   margin-bottom: 10px;
   padding: 10px;
 }
+
+div.comment-item p {
+  margin-bottom: 20px;
+}
+
+div.comment-item p:last-child {
+  margin-bottom: 0;
+}
