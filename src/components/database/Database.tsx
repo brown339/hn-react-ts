@@ -25,13 +25,14 @@ const Database = {
   },
 
   async getItemById(id: number): Promise<Item> {
-    const snap = db.ref(`/v0/item/${id}`).get();
-    const val = (await snap).val();
+    const snap = await db.ref(`/v0/item/${id}`).get();
+    const val = snap.val();
     return val;
   },
 
-  getCommentsByStoryId(id: string) {
-
+  getLatestItem(): firebase.database.Reference {
+    const ref = db.ref(`/v0/maxitem`);
+    return ref;
   },
 };
 

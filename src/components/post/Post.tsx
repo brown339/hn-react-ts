@@ -1,5 +1,6 @@
 import './Post.css';
 
+import parse from 'html-react-parser';
 import React from 'react';
 
 import Item from '../../models/Item';
@@ -41,7 +42,6 @@ class Post extends React.Component<Props, State> {
     let callback = (entries: any, obs: any) => {
       entries.forEach((entry: any) => {
         if (entry.isIntersecting && !this.isSeen()) {
-          console.log('seen:', id);
           const seen = JSON.parse(localStorage.getItem('seen') as string) || [];
           seen.push(id);
           localStorage.setItem('seen', JSON.stringify(seen));
@@ -102,7 +102,7 @@ class Post extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { title, kids, id } = this.state.story || {};
+    const { title, text, kids, id } = this.state.story || {};
     const { bookmarked } = this.state;
 
     return (
@@ -110,7 +110,7 @@ class Post extends React.Component<Props, State> {
         className={`post-item ${bookmarked ? 'bookmarked': ''}`}
         onClick={() => this.handleClick(id)}
         data-id={id}>
-        <p>{title}</p>
+        <p>{(title && parse(title)) || (text && parse(text))}</p>
 
         {kids &&
           <div className="comment-list">

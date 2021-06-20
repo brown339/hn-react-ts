@@ -7,6 +7,7 @@ export default interface Item {
   time: number,
   title?: string,
   text?: string,
-  type: string,
+  type?: string,
+  parent?: number,
   url: string
 }
